@@ -58,7 +58,7 @@ def enviar_email_outlook(destinatario, assunto, corpo, anexos=None):
 # CARREGAMENTO DA PLANILHA
 arquivo = "Processos.xlsx"
 if not os.path.exists(arquivo):
-    logging.error(f"❌ Arquivo {arquivo} não encontrado.")
+    logging.error(f"Arquivo {arquivo} não encontrado.")
     raise FileNotFoundError(f"O arquivo {arquivo} não foi encontrado no diretório atual.")
 
 wb = load_workbook(arquivo)
