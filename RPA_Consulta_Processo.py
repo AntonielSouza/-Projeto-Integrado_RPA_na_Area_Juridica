@@ -1,5 +1,10 @@
 """
 Automação Jurídica - Consulta TJSP com IA e Logs
+
+Instalação:
+pip install -r requirements.txt
+playwright install
+
 """
 
 
@@ -75,7 +80,7 @@ with sync_playwright() as p:
             page.wait_for_timeout(5000)
 
             # Salva a página HTML
-            # nome_html = os.path.join(pasta_destino, f"{doc_contraparte}_tjsp.html")
+            nome_html = os.path.join(pasta_destino, f"{doc_contraparte}_tjsp.html")
             # with open(nome_html, "w", encoding="utf-8") as f:
             #     f.write(page.content())
             # logging.info(f"HTML salvo com sucesso em: {nome_html}")
