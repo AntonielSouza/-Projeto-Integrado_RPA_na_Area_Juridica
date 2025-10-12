@@ -4,9 +4,7 @@ Automação Jurídica - Consulta TJSP com IA e Logs
 Instalação:
 pip install -r requirements.txt
 playwright install
-
 """
-
 
 import logging
 from datetime import datetime
@@ -16,6 +14,7 @@ from playwright.sync_api import sync_playwright
 from openpyxl import load_workbook
 import os
 import re
+import win32com.client as win32
 
 # CONFIGURAÇÃO DO LOGGING
 os.makedirs("logs", exist_ok=True)
@@ -41,9 +40,23 @@ except Exception as e:
     logging.exception("Erro ao carregar modelo de IA: %s", e)
     raise
 
+# Enviar e-mail via Outlook
+def enviar_email_outlook(destinatario, assunto, corpo, anexos=None):
+    outlook = win32.Dispatch('outlook.application')
+    email = outlook.CreateItem(0)  # 0 = e-mail
+
+    email.To = destinatario
+    email.Subject = assunto
+    email.Body = corpo
+    if anexos:
+        for anexo in anexos:
+            email.Attachments.Add(anexo)
+    email.Send()
+    print("E-mail enviado com sucesso pelo Outlook!")
+
     
 # CARREGAMENTO DA PLANILHA
-arquivo = "processos.xlsx"
+arquivo = "Processos.xlsx"
 if not os.path.exists(arquivo):
     logging.error(f"❌ Arquivo {arquivo} não encontrado.")
     raise FileNotFoundError(f"O arquivo {arquivo} não foi encontrado no diretório atual.")
@@ -124,9 +137,15 @@ with sync_playwright() as p:
                 except Exception as e:
                     logging.warning(f"Erro ao responder '{pergunta}' no processo {doc_contraparte}: {e}")
 
-            # Salva alterações parciais
-            wb.save("processos.xlsx")
+            wb.save("Processos.xlsx")
             logging.info(f"Planilha atualizada com sucesso para o processo {doc_contraparte}.")
+
+            enviar_email_outlook(
+            destinatario="equipe@exemplo.com",
+            assunto="Atualização do processo TJSP",
+            corpo="Olá, equipe!\n\nSegue em anexo o resultado da automação.\n\nAtenciosamente,\nRobô Jurídico",
+            anexos=[nome_html]
+            )
 
         except Exception as e:
             logging.exception(f"Erro ao processar o processo {doc_contraparte}: {e}")
