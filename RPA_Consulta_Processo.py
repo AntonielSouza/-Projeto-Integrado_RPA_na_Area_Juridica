@@ -43,8 +43,7 @@ except Exception as e:
 # Enviar e-mail via Outlook
 def enviar_email_outlook(destinatario, assunto, corpo, anexos=None):
     outlook = win32.Dispatch('outlook.application')
-    email = outlook.CreateItem(0)  # 0 = e-mail
-
+    email = outlook.CreateItem(0)
     email.To = destinatario
     email.Subject = assunto
     email.Body = corpo
@@ -140,11 +139,12 @@ with sync_playwright() as p:
             wb.save("Processos.xlsx")
             logging.info(f"Planilha atualizada com sucesso para o processo {doc_contraparte}.")
 
+            print(os.path.abspath(nome_html))
             enviar_email_outlook(
             destinatario="equipe@exemplo.com",
-            assunto="Atualização do processo TJSP",
+            assunto= f"Atualização do processo TJSP {nome_limpo}",
             corpo="Olá, equipe!\n\nSegue em anexo o resultado da automação.\n\nAtenciosamente,\nRobô Jurídico",
-            anexos=[nome_html]
+            anexos=[os.path.abspath(nome_html)]
             )
 
         except Exception as e:
