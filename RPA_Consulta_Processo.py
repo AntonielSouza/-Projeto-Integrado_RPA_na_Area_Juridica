@@ -72,6 +72,7 @@ with sync_playwright() as p:
     for row in ws.iter_rows(min_row=2):
         nome_parte = str(row[0].value).strip() if row[0].value else "Parte_Desconhecida"
         doc_contraparte = str(row[1].value).strip() if row[1].value else None
+        tipo_acao_existente = str(row[3].value).strip() if row[3].value else ""  # Coluna D
         if not doc_contraparte:
             continue
 
@@ -103,38 +104,56 @@ with sync_playwright() as p:
                 contexto = soup.get_text()
             logging.info("Arquivo HTML carregado e processado para texto.")
 
-            # Perguntas para a IA
-            perguntas = [
-                "Qual o número da ação?",
-                "Qual o tipo da ação?",
-                "Qual o valor da ação?",
-                "Qual a comarca?",
-                "Qual o nome do juiz?",
-                "Qual o último andamento do processo?"
-            ]
-
-            # Loop para perguntas
-            for pergunta in perguntas:
-                try:
+            #Se a coluna D (tipo da ação) já tiver preenchido:
+            if tipo_acao_existente:
+                logging.info("Tipo da ação já preenchido — capturando apenas o último andamento.")
+                ultima_mov = soup.select_one("td.descricaoMovimentacao")
+                if ultima_mov:
+                    ultimo_andamento = ultima_mov.get_text(strip=True)
+                    row[7].value = ultimo_andamento
+                    logging.info(f"Último andamento identificado: {ultimo_andamento}")
+                else:
+                    pergunta = (
+                        "Com base no texto abaixo, identifique e retorne apenas a descrição do último movimento processual, "
+                        "ignorando completamente datas ou números. Exemplo: 'Conclusos para Sentença', 'Julgado Procedente', etc."
+                    )
                     resposta = qa(question=pergunta, context=contexto)
                     resposta_texto = resposta["answer"]
-                    logging.info(f"Pergunta: {pergunta} | Resposta: {resposta_texto}")
+                    row[7].value = resposta_texto  # Coluna H - último andamento
+                    logging.info(f"Resumo do ultimo Movimento identificado: {resposta_texto}")
+            else:
+                # Perguntas para a IA
+                perguntas = [
+                    "Qual o número da ação?",
+                    "Qual o tipo da ação?",
+                    "Qual o valor da ação?",
+                    "Qual a comarca?",
+                    "Qual o nome do juiz?",
+                    "Qual o último andamento do processo?"
+                ]
 
-                    if "número da ação" in pergunta.lower():
-                        row[2].value = resposta_texto   # Coluna C
-                    elif "tipo da ação" in pergunta.lower():
-                        row[3].value = resposta_texto   # Coluna D
-                    elif "valor" in pergunta.lower():
-                        row[4].value = resposta_texto   # Coluna E
-                    elif "comarca" in pergunta.lower():
-                        row[5].value = resposta_texto   # Coluna F
-                    elif "juiz" in pergunta.lower():
-                        row[6].value = resposta_texto   # Coluna G
-                    elif "andamento" in pergunta.lower():
-                        row[7].value = resposta_texto   # Coluna H
+                # Loop para perguntas
+                for pergunta in perguntas:
+                    try:
+                        resposta = qa(question=pergunta, context=contexto)
+                        resposta_texto = resposta["answer"]
+                        logging.info(f"Pergunta: {pergunta} | Resposta: {resposta_texto}")
 
-                except Exception as e:
-                    logging.warning(f"Erro ao responder '{pergunta}' no processo {doc_contraparte}: {e}")
+                        if "número da ação" in pergunta.lower():
+                            row[2].value = resposta_texto   # Coluna C
+                        elif "tipo da ação" in pergunta.lower():
+                            row[3].value = resposta_texto   # Coluna D
+                        elif "valor" in pergunta.lower():
+                            row[4].value = resposta_texto   # Coluna E
+                        elif "comarca" in pergunta.lower():
+                            row[5].value = resposta_texto   # Coluna F
+                        elif "juiz" in pergunta.lower():
+                            row[6].value = resposta_texto   # Coluna G
+                        elif "andamento" in pergunta.lower():
+                            row[7].value = resposta_texto   # Coluna H
+
+                    except Exception as e:
+                        logging.warning(f"Erro ao responder '{pergunta}' no processo {doc_contraparte}: {e}")
 
             wb.save("Processos.xlsx")
             logging.info(f"Planilha atualizada com sucesso para o processo {doc_contraparte}.")
