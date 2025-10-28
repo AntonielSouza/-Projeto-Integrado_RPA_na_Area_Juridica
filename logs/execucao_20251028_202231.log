@@ -1,0 +1,55 @@
+2025-10-28 20:22:31,801 [INFO] ===== INICIANDO EXECUÇÃO DO ROBÔ JURÍDICO =====
+2025-10-28 20:22:35,616 [INFO] Modelo de IA carregado com sucesso (HuggingFace - BERT Português).
+2025-10-28 20:22:35,620 [INFO] Planilha 'Processos.xlsx' carregada com sucesso. Aba ativa: Plan1
+2025-10-28 20:22:36,251 [INFO] Consultando processo: 123456789012
+2025-10-28 20:22:41,900 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:22:41,900 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:22:41,902 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:22:41,914 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:22:45,525 [INFO] Consultando processo: 123456789012
+2025-10-28 20:22:50,734 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:22:50,735 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:22:50,737 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:22:50,752 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:22:50,866 [INFO] Consultando processo: 123456789012
+2025-10-28 20:22:56,071 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:22:56,072 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:22:56,074 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:22:56,082 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:22:56,209 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:01,421 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:01,422 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:01,424 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:01,436 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:01,560 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:06,749 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:06,749 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:06,753 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:06,765 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:06,918 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:12,123 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:12,123 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:12,125 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:12,133 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:12,271 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:17,479 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:17,480 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:17,481 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:17,487 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:17,609 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:22,783 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:22,785 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:22,787 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:22,795 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:22,919 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:28,148 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:28,149 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:28,150 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:28,158 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:28,248 [INFO] Consultando processo: 123456789012
+2025-10-28 20:23:33,452 [INFO] Arquivo HTML carregado e processado para texto.
+2025-10-28 20:23:33,452 [INFO] Tipo da ação já preenchido — capturando apenas o último andamento.
+2025-10-28 20:23:33,453 [INFO] Último andamento identificado: Conclusos para Sentença
+2025-10-28 20:23:33,468 [INFO] Planilha atualizada com sucesso para o processo 123456789012.
+2025-10-28 20:23:33,800 [INFO] ===== EXECUÇÃO FINALIZADA COM SUCESSO =====
+2025-10-28 20:23:33,800 [INFO] Arquivo de log salvo em: logs/execucao_20251028_202231.log
